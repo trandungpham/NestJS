@@ -2,8 +2,8 @@ import { Module, forwardRef } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { BlogController } from './blog.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/user/dto/user.entity';
-import { Blog } from './dto/blog.entity';
+import { User } from 'src/user/entity/user.entity';
+import { Blog } from './entity/blog.entity';
 import { AuthModule } from 'src/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 

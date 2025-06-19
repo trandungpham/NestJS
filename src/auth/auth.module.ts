@@ -8,24 +8,25 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
 
 @Module({
-    imports: [
-        forwardRef(() => UserModule),
-        JwtModule.registerAsync({
-            imports: [ConfigModule],
-            inject: [ConfigService],
-            useFactory: async (ConfigService: ConfigService) => ({
-                secret: ConfigService.get('JWT_SECRET'),
-                signOptions: { expiresIn: '6h'}
-            })
-        })
-    ],
-    controllers: [AuthController],
-    providers: [AuthService,
-        {
-        provide: APP_GUARD,
-        useClass: AuthGuard,
-        },
-    ],
-    exports: [AuthService],
+  imports: [
+    forwardRef(() => UserModule),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (ConfigService: ConfigService) => ({
+        secret: ConfigService.get('JWT_SECRET'),
+        signOptions: { expiresIn: '6h' },
+      }),
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [
+    AuthService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
+  exports: [AuthService],
 })
 export class AuthModule {}

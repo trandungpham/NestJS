@@ -9,13 +9,13 @@ import { BlogModule } from './blog/blog.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal : true}),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-        type: 'postgres',
-        url: process.env.DATABASE_URL,
-        autoLoadEntities: true,
-        synchronize: true,
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+      synchronize: true,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     UserModule,
     AuthModule,
