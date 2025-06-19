@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Delete, Put, HttpCode, HttpStatus } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Delete, Put, HttpCode, HttpStatus, Patch } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { User } from './dto/user.entity';
@@ -8,6 +8,7 @@ import { Public } from 'src/auth/public';
 export class UserController {
     constructor( private readonly userService: UserService) {}
 
+    @Public()
     @Post()
     create(@Body() createUserDTO: CreateUserDto) {
         return this.userService.create(createUserDTO);
@@ -19,7 +20,7 @@ export class UserController {
     }
 
     @Get(':id')
-    findOne(@Param('id', new ParseIntPipe()) id: number,) {
+    findOne(@Param('id', new ParseIntPipe()) id: number) {
         return this.userService.findbyID(id);
     }
 
@@ -28,7 +29,7 @@ export class UserController {
         return this.userService.remove(id);
     }
 
-    @Put(':id')
+    @Patch(':id')
     update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
         return this.userService.update(id, updateUserDto);
     }
